@@ -1,24 +1,21 @@
 import 'dart:math';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'url_provider.dart';
 
-import 'products_provider.dart';
-
-class ProductModel {
+class UrlModel {
   static int _id = 0;
-
   final String title;
   bool isFavorite;
   int id;
 
-  ProductModel({
+  UrlModel({
     required this.title,
     required this.id,
     this.isFavorite = false,
   });
 
-  factory ProductModel.random() {
-    return ProductModel(
+  factory UrlModel.random() {
+    return UrlModel(
       // generate a random title
       title: randomLipsum(),
       // generate a random favorite status
@@ -28,9 +25,13 @@ class ProductModel {
     );
   }
 
+  String get name => title;
+
+  int get item_id => id;
+
   // creating a new instance of the same product
-  ProductModel copyWith({String? title, bool? isFavorite}) {
-    return ProductModel(
+  UrlModel copyWith({String? title, bool? isFavorite}) {
+    return UrlModel(
       title: title ?? this.title,
       isFavorite: isFavorite ?? this.isFavorite,
       id: id,
@@ -42,7 +43,7 @@ class ProductModel {
     isFavorite = !isFavorite;
 
     // notify the provider
-    ref.read(productsProvider.notifier).setFavorite(id, isFavorite);
+    ref.read(listStateNotifierProvider.notifier).setFavorite(id, isFavorite);
   }
 }
 

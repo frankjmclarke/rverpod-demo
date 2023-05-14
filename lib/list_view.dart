@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'product_item.dart';
-import 'products_provider.dart';
+import 'item_view.dart';
+import 'url_provider.dart';
 
-class ProductList extends ConsumerWidget {
-  const ProductList({Key? key}) : super(key: key);
+class UrlList extends ConsumerWidget {
+  const UrlList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final products = ref.watch(productsProvider);
+    final products = ref.watch(listStateNotifierProvider);
 
     return ListView.builder(
       itemBuilder: (context, index) {
-        return ProductItem(
+        return UrlItem(
           products[index],
         );
       },
